@@ -1,66 +1,81 @@
 import SwiftUI
 
+enum HapticType: String, CaseIterable, Identifiable {
+    case light, medium, heavy, success, warning, error, selection
+
+    var id: String { rawValue }
+}
+
 struct ContentView: View {
-    @State private var serverStatus: String = "Stopped"
-    @State private var serverAddress: String = "N/A"
-    @State private var isServerRunning: Bool = false
-    
-    // Use @StateObject for reference types that you want to persist across view updates
-    // and that conform to ObservableObject. HapticServer is not ObservableObject, so we'll just instantiate it.
-    private let hapticServer = HapticServer()
+    let hapticTypes: [HapticType] = HapticType.allCases
+
+    // repeat each 5 seconds
+    @State private var timer: Timer? = nil
+    init() {
+        // Start a timer to trigger heavy haptic feedback every 5 seconds
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+            // triggerHaptic(type: .heavy)
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            generator.impactOccurred()
+        }
+    }
 
     var body: some View {
-        VStack {
-            Text("HapticPencil Bridge")
-                .font(.largeTitle)
-                .padding()
+        VStack(spacing: 20) {
+            Text("Haptic Feedback Tester")
+                .font(.title)
+                .padding(.top, 40)
 
-            Spacer()
-
-            Text("Server Status: \(serverStatus)")
-                .font(.headline)
-                .padding(.bottom, 5)
-
-            Text("Address: \(serverAddress)")
-                .font(.subheadline)
-                .padding(.bottom, 20)
-
-            Button(action: {
-                Task {
-                    if isServerRunning {
-                        hapticServer.stop()
-                        serverStatus = "Stopped"
-                        serverAddress = "N/A"
-                    } else {
-                        serverStatus = "Starting..."
-                        do {
-                            let address = try await hapticServer.start()
-                            serverAddress = address
-                            serverStatus = "Running"
-                        } catch {
-                            serverStatus = "Failed to Start"
-                            serverAddress = "Error"
-                            print("Error starting server: \(error)")
-                        }
-                    }
-                    isServerRunning.toggle()
+            ForEach(hapticTypes) { type in
+                Button(action: {
+                    triggerHaptic(type: type)
+                }) {
+                    Text(type.rawValue.capitalized)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
-            }) {
-                Text(isServerRunning ? "Stop Server" : "Start Server")
-                    .font(.title2)
-                    .padding()
-                    .background(isServerRunning ? Color.red : Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                .padding(.horizontal)
             }
-            .padding()
 
             Spacer()
         }
-        .padding()
     }
-}
 
-#Preview {
-    ContentView()
+    func triggerHaptic(type: HapticType) {
+        switch type {
+        case .light:
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.prepare()
+            generator.impactOccurred()
+        case .medium:
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            generator.impactOccurred()
+        case .heavy:
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            generator.impactOccurred()
+        case .success:
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.success)
+        case .warning:
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.warning)
+        case .error:
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.error)
+        case .selection:
+            let generator = UISelectionFeedbackGenerator()
+            generator.prepare()
+            generator.selectionChanged()
+        }
+    }
 }
