@@ -1,44 +1,13 @@
-import SwiftUI
+import UIKit
 
-struct ContentView: View {
-    @EnvironmentObject var hapticServer: HapticServer
-    let hapticTypes: [HapticType] = HapticType.allCases
+enum HapticType: String, CaseIterable, Identifiable, Decodable {
+    case light, medium, heavy, success, warning, error, selection
 
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Haptic Feedback Tester")
-                .font(.title)
-                .padding(.top, 40)
+    var id: String { rawValue }
+}
 
-            ForEach(hapticTypes) { type in
-                Button(action: {
-                    triggerHaptic(type: type)
-                }) {
-                    Text(type.rawValue.capitalized)
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-            }
-
-            Spacer()
-        }
-        .onAppear {
-            Task {
-                do {
-                    try await hapticServer.start()
-                } catch {
-                    print("Error starting HapticServer: \(error)")
-                }
-            }
-        }
-    }
-
-    func triggerHaptic(type: HapticType) {
+struct HapticManager {
+    static func trigger(type: HapticType) {
         switch type {
         case .light:
             let generator = UIImpactFeedbackGenerator(style: .light)

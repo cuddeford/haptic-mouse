@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct HapticPencil_BridgeApp: App {
+    @StateObject private var hapticServer = HapticServer()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(hapticServer)
         }
     }
 }
