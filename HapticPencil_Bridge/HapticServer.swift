@@ -53,6 +53,33 @@ class HapticServer: ObservableObject {
     }
 
     func setupRoutes() {
+        // WebSocket route
+        app.webSocket("haptic-ws") { req, ws in
+            print("Client connected to WebSocket!")
+
+            ws.onText { ws, text in
+                print("Received text: \(text)")
+                do {
+                    let hapticRequest = try JSONDecoder().decode(HapticRequest.self, from: Data(text.utf8))
+                    HapticManager.trigger(type: hapticRequest.type)
+                    try await ws.send("Haptic triggered: \(hapticRequest.type.rawValue)")
+                } catch {
+                    print("Error decoding haptic request or triggering haptic: \(error)")
+                    try? await ws.send("Error: Invalid haptic request")
+                }
+            }
+
+            ws.onClose.whenComplete { result in
+                switch result {
+                case .success:
+                    print("WebSocket closed.")
+                case .failure(let error):
+                    print("WebSocket closed with error: \(error)")
+                }
+            }
+        }
+
+        // REST API route
         app.post("haptic") { req -> HTTPStatus in
             let hapticRequest = try req.content.decode(HapticRequest.self)
             HapticManager.trigger(type: hapticRequest.type)
