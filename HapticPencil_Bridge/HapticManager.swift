@@ -1,42 +1,63 @@
+import Foundation
+
+#if os(iOS)
 import UIKit
-
-enum HapticType: String, CaseIterable, Identifiable, Decodable {
-    case light, medium, heavy, success, warning, error, selection
-
-    var id: String { rawValue }
-}
+#elseif os(watchOS)
+import WatchKit
+#endif
 
 struct HapticManager {
     static func trigger(type: HapticType) {
+        #if os(iOS)
+        // iOS-specific haptics
         switch type {
         case .light:
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.prepare()
-            generator.impactOccurred()
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
         case .medium:
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.prepare()
-            generator.impactOccurred()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         case .heavy:
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
-            generator.prepare()
-            generator.impactOccurred()
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         case .success:
-            let generator = UINotificationFeedbackGenerator()
-            generator.prepare()
-            generator.notificationOccurred(.success)
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
         case .warning:
-            let generator = UINotificationFeedbackGenerator()
-            generator.prepare()
-            generator.notificationOccurred(.warning)
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
         case .error:
-            let generator = UINotificationFeedbackGenerator()
-            generator.prepare()
-            generator.notificationOccurred(.error)
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
         case .selection:
-            let generator = UISelectionFeedbackGenerator()
-            generator.prepare()
-            generator.selectionChanged()
+            UISelectionFeedbackGenerator().selectionChanged()
+        case .notification, .directionUp, .directionDown, .failure, .retry, .start, .stop, .click:
+            // These haptic types are primarily for watchOS and don't have direct iOS equivalents
+            // We can choose to do nothing or map them to a generic iOS haptic if desired.
+            // For now, we'll do nothing to avoid unexpected haptics on iOS.
+            break
         }
+        #elseif os(watchOS)
+        // watchOS-specific haptics
+        let watchHapticType: WKHapticType
+        switch type {
+        case .notification:
+            watchHapticType = .notification
+        case .directionUp:
+            watchHapticType = .directionUp
+        case .directionDown:
+            watchHapticType = .directionDown
+        case .success:
+            watchHapticType = .success
+        case .failure:
+            watchHapticType = .failure
+        case .retry:
+            watchHapticType = .retry
+        case .start:
+            watchHapticType = .start
+        case .stop:
+            watchHapticType = .stop
+        case .click:
+            watchHapticType = .click
+        default:
+            print("Haptic type \(type.rawValue) not supported on watchOS")
+            return
+        }
+        WKInterfaceDevice.current().play(watchHapticType)
+        #endif
     }
 }

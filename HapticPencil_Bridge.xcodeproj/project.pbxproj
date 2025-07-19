@@ -8,13 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		6506B3C22E1F169800764523 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 6506B3C12E1F169800764523 /* Vapor */; };
+		6506B3F62E201A6700764523 /* HapticWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6506B3EB2E201A6600764523 /* HapticWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6506B3F32E201A6700764523 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65BD87352E1ED19A0015D228 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6506B3EA2E201A6600764523;
+			remoteInfo = "HapticWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6506B3F52E201A6700764523 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				6506B3F62E201A6700764523 /* HapticWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		6506B3EB2E201A6600764523 /* HapticWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HapticWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65BD873D2E1ED19A0015D228 /* HapticPencil_Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HapticPencil_Bridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6506B3EC2E201A6600764523 /* HapticWatch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "HapticWatch Watch App";
+			sourceTree = "<group>";
+		};
 		65BD873F2E1ED19A0015D228 /* HapticPencil_Bridge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HapticPencil_Bridge;
@@ -23,6 +54,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6506B3E82E201A6600764523 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65BD873A2E1ED19A0015D228 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				65BD873F2E1ED19A0015D228 /* HapticPencil_Bridge */,
+				6506B3EC2E201A6600764523 /* HapticWatch Watch App */,
 				65BD873E2E1ED19A0015D228 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				65BD873D2E1ED19A0015D228 /* HapticPencil_Bridge.app */,
+				6506B3EB2E201A6600764523 /* HapticWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +93,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6506B3EA2E201A6600764523 /* HapticWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6506B3F72E201A6700764523 /* Build configuration list for PBXNativeTarget "HapticWatch Watch App" */;
+			buildPhases = (
+				6506B3E72E201A6600764523 /* Sources */,
+				6506B3E82E201A6600764523 /* Frameworks */,
+				6506B3E92E201A6600764523 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6506B3EC2E201A6600764523 /* HapticWatch Watch App */,
+			);
+			name = "HapticWatch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "HapticWatch Watch App";
+			productReference = 6506B3EB2E201A6600764523 /* HapticWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		65BD873C2E1ED19A0015D228 /* HapticPencil_Bridge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65BD87482E1ED19B0015D228 /* Build configuration list for PBXNativeTarget "HapticPencil_Bridge" */;
@@ -60,10 +122,12 @@
 				65BD87392E1ED19A0015D228 /* Sources */,
 				65BD873A2E1ED19A0015D228 /* Frameworks */,
 				65BD873B2E1ED19A0015D228 /* Resources */,
+				6506B3F52E201A6700764523 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6506B3F42E201A6700764523 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				65BD873F2E1ED19A0015D228 /* HapticPencil_Bridge */,
@@ -86,6 +150,9 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					6506B3EA2E201A6600764523 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					65BD873C2E1ED19A0015D228 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -109,11 +176,19 @@
 			projectRoot = "";
 			targets = (
 				65BD873C2E1ED19A0015D228 /* HapticPencil_Bridge */,
+				6506B3EA2E201A6600764523 /* HapticWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6506B3E92E201A6600764523 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65BD873B2E1ED19A0015D228 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,6 +199,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6506B3E72E201A6600764523 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65BD87392E1ED19A0015D228 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,7 +215,79 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6506B3F42E201A6700764523 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6506B3EA2E201A6600764523 /* HapticWatch Watch App */;
+			targetProxy = 6506B3F32E201A6700764523 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6506B3F82E201A6700764523 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "HapticWatch Watch App/HapticWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HC484993KB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = HapticWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.silverbirch.HapticPencil-Bridge";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app uses workout sessions to keep running in the background.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app uses workout sessions to keep running in the background.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.silverbirch.HapticPencil-Bridge.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Debug;
+		};
+		6506B3F92E201A6700764523 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "HapticWatch Watch App/HapticWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HC484993KB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = HapticWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.silverbirch.HapticPencil-Bridge";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app uses workout sessions to keep running in the background.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app uses workout sessions to keep running in the background.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.silverbirch.HapticPencil-Bridge.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Release;
+		};
 		65BD87462E1ED19B0015D228 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -270,6 +424,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This app needs to access the local network to receive haptic commands.";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,6 +454,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This app needs to access the local network to receive haptic commands.";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -316,6 +472,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6506B3F72E201A6700764523 /* Build configuration list for PBXNativeTarget "HapticWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6506B3F82E201A6700764523 /* Debug */,
+				6506B3F92E201A6700764523 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65BD87382E1ED19A0015D228 /* Build configuration list for PBXProject "HapticPencil_Bridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

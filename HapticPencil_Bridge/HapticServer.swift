@@ -61,10 +61,10 @@ class HapticServer: ObservableObject {
                 print("Received text: \(text)")
                 do {
                     let hapticRequest = try JSONDecoder().decode(HapticRequest.self, from: Data(text.utf8))
-                    HapticManager.trigger(type: hapticRequest.type)
-                    try await ws.send("Haptic triggered: \(hapticRequest.type.rawValue)")
+                    ConnectivityManager.shared.sendHaptic(hapticRequest.type)
+                    try await ws.send("Haptic command sent to watch: \(hapticRequest.type.rawValue)")
                 } catch {
-                    print("Error decoding haptic request or triggering haptic: \(error)")
+                    print("Error decoding haptic request or sending to watch: \(error)")
                     try? await ws.send("Error: Invalid haptic request")
                 }
             }
@@ -82,7 +82,7 @@ class HapticServer: ObservableObject {
         // REST API route
         app.post("haptic") { req -> HTTPStatus in
             let hapticRequest = try req.content.decode(HapticRequest.self)
-            HapticManager.trigger(type: hapticRequest.type)
+            ConnectivityManager.shared.sendHaptic(hapticRequest.type)
             return .ok
         }
     }
